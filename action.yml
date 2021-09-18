@@ -1,0 +1,20 @@
+name: Checkout and install esp-idf
+description: Checks out or updates esp-idf and installs dependencies
+inputs:
+  idfpath:
+    description: Path to esp-idf (should be a submodule of the firmware repository)
+    required: false
+    default: esp-idf
+outputs: {}
+runs:
+  using: composite
+  steps:
+    - name: Fast Submodule Checkout esp-idf
+      uses: 0xFEEDC0DE64/fast_submodule_checkout@main
+      with:
+        submodule: ${{ inputs.idfpath }}
+
+    - name: Install esp-idf
+      uses: 0xFEEDC0DE64/install_esp_idf@main
+      with:
+        idfpath: ${{ inputs.idfpath }}
